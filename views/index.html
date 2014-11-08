@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reminders</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<script type="text/x-handlebars" data-template-name="timers/index">
+		<ul id="timer-list">
+			{{#each itemController="timer"}}
+				<li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+					{{#if isEditing}}
+						{{edit-timer class="edit" value=title insert-newLine="acceptChanges" placeholder="Description"}}
+						{{input class="edit" value=formattedEnd focus-out="acceptChanges" insert-newLine="acceptChanges" placeholder="End: yyyy-mm-dd hh:mm"}}
+					{{else}}
+						{{input type="checkbox" checked=isCompleted class="toggle"}}
+						<label {{action "editTimer" on="doubleClick"}}>{{title}} <span class="pull-right time-until">{{from}}</span></label>
+						<button class="destroy" {{action "removeTimer"}}></button>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="timers">
+		<h1>reminders</h1>
+		<section class="cf">
+			<header id="header">
+				{{input type="text" id="new-timer" placeholder="What do you need to remember?" value=newTitle action="createTimer" }}
+			</header>
+			<section id="main">
+				{{outlet}}
+			</section>
+		</section>
+
+		<footer id="info">
+			<p>Double-click to edit a reminder</p>
+		</footer>
+	</script>
+	<script src="bower_components/jquery/jquery.js"></script>
+	<script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/handlebars/handlebars.js"></script>
+	<script src="bower_components/ember/ember.js"></script>
+	<script src="bower_components/ember-data/ember-data.js"></script>
+</body>
+</html>

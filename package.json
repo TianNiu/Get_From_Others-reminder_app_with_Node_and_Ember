@@ -1,0 +1,19 @@
+{
+	"name": "reminders",
+	"main": "server.js",
+	"dependencies": {
+		"express": "latest",
+		"express-promise": "latest",
+		"mongoose": "latest",
+		"moment": "latest",
+		"ejs": "latest"
+	},
+	"subdomain": "reminders",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"version": "0.0.0-12",
+	"engines": {
+		"node": "0.10.x"
+	}
+}
